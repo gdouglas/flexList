@@ -1,0 +1,98 @@
+body{
+  margin: 8px;
+}
+.pull-right{ 
+  float: right;
+}
+
+.active {
+  background: darkgray;
+  color: white;
+}
+.striped tr:nth-child(odd){
+  background: #ccc;
+}
+.table {
+  display: table;
+  margin: 0;
+}
+td {
+  text-align: center;
+}
+div.dt-button-collection {
+  width: 400px;
+  columns: 150px;
+}
+div.dt-button-collection a.dt-button {
+  position: static;
+  box-sizing: border-box;
+  padding: 0;
+}
+.inc {
+  border-right: 1px solid #000;
+  display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 10px;
+  background: #ddd;
+  width: 10px;
+}
+
+
+#list thead button {
+  width: 25px;
+  height: 25px;
+  float: right;
+  clear: right; 
+}
+button i {
+  pointer-events: none;
+}
+#list th {
+  position: relative;
+  vertical-align: top;
+  background: #ccc;
+  border: 1px solid #fff;
+  pointer-events: none;
+}
+#list th button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  pointer-events: all;
+  padding: 0;
+}
+#list th button:nth-child(3) {
+  top: 40px;
+}
+#list th input[type="text"] {
+  position: relative;
+  z-index: 50;
+  pointer-events: all;
+  width: calc(100% + 36px);
+  margin: 38px -18px 0;
+}
+#list th div{
+  float: left;
+  padding-right: 30px;
+  min-width: 75px;
+}
+.admin {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.admin:hover {
+  border:1px solid #6ec4e8;
+}
+.admin:hover:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: 'Glyphicons Halflings';
+  content:"\270f";
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 3px;
+  border-radius: 3px;
+  background: #6ec4e8;
+}

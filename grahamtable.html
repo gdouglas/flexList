@@ -1,0 +1,578 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.js"></script>
+
+<script>
+
+var cols = [
+  {
+    title: 'Activity ID',
+    data: 'Activity ID',
+    orderable: false
+  },
+  {
+    title: 'Activity Title',
+    data: 'Activity Title'
+  },
+  {
+    title: 'Activity Status <button type="button" class="btn btn-default my-button">Yo.</button>',
+    data: 'Activity Status',
+    orderable:false
+  },
+  {
+    title: 'Primary Supervisor',
+    data: 'Primary Supervisor'
+  },
+  {
+    title: 'Cycle',
+    data: 'Cycle'
+  },
+  {
+    title: 'Start Date',
+    data: 'Start Date'
+  },
+  {
+    title: 'End Date',
+    data: 'End Date'
+  },
+  {
+    title: 'Description',
+    data: 'Description'
+  },
+  {
+    title: 'Max Hours',
+    data: 'Max hours'
+  },
+  {
+    title: 'Est # of hours',
+    data: 'Est # of hours'
+  },
+  {
+    title: 'Max # of Students',
+    data: 'Max # of Students'
+  },
+  {
+    title: 'Site',
+    data: 'Site'
+  },
+  {
+    title: 'Link to Activity',
+    data: 'Link to Activity'
+  }
+];
+
+var data = [
+  {
+    "Activity ID": "00001",
+    "Activity Title": "Translational Research in Acute Cerebrovascular Syndrome (ACVS)",
+    "Activity Status": "Proposed",
+    "Primary Supervisor": "Votova, Kristine          Penn, Andrew",
+    "Cycle": 1,
+    "Start Date": "05-mar-18",
+    "End Date": "09-Apr-18",
+    "Description": "5 half-days",
+    "Max hours": 20,
+    "Est # of hours": 20,
+    "Max # of Students": 10,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00001",
+    "Activity Title": "Translational Research in Acute Cerebrovascular Syndrome (ACVS)",
+    "Activity Status": "Proposed",
+    "Primary Supervisor": "Votova, Kristine          Penn, Andrew",
+    "Cycle": 2,
+    "Start Date": "05-mar-18",
+    "End Date": "09-Apr-18",
+    "Description": "5 half-days",
+    "Max hours": 20,
+    "Est # of hours": 20,
+    "Max # of Students": 10,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00002",
+    "Activity Title": "Anatomy Education Project",
+    "Activity Status": "Approved",
+    "Primary Supervisor": "Todd Wallace",
+    "Cycle": 1,
+    "Start Date": "01-Sep-17",
+    "End Date": "09-Apr-18",
+    "Description": "1 full-days",
+    "Max hours": 8,
+    "Est # of hours": 8,
+    "Max # of Students": 50,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00004",
+    "Activity Title": "Writing of a Scientific Review Article on Brain Plasticity & Neurodegeneration",
+    "Activity Status": "Approved",
+    "Primary Supervisor": "Gil-Mohapel, Joana",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 2,
+    "Max # of Students": 4,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00005",
+    "Activity Title": "Evaluation of evidence-based concussion assessment methods on Vancouver Island",
+    "Activity Status": "Proposed",
+    "Primary Supervisor": "Christie, Brian",
+    "Cycle": 2,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 full-days",
+    "Max hours": 9,
+    "Est # of hours": 5,
+    "Max # of Students": 6,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00006",
+    "Activity Title": "Cool Aid Clinic - Community Based Volunteer Activity/ Research With Marginalized Populations",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Drost, Anne",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "3 half-days",
+    "Max hours": 3,
+    "Est # of hours": 1,
+    "Max # of Students": 1,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00009",
+    "Activity Title": "eHome i-Care: Modeling Changes in Mobility, Cognition and Daily Acitivities to Predict Care needs in Community Dwelling Older Adults Living with Cognitive Impairment",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Sheets, Debra",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 2,
+    "Est # of hours": 2,
+    "Max # of Students": 2,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000011",
+    "Activity Title": "Immigrant and Refugee Health awareness / education projects",
+    "Activity Status": "Approved",
+    "Primary Supervisor": "Moreno, Alvaro",
+    "Cycle": 2,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 3,
+    "Est # of hours": 2,
+    "Max # of Students": 2,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000012",
+    "Activity Title": "IH - Supportive Cancer Care",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Dr Lori McFarlane",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "1 full-day",
+    "Max hours": 2,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "VFMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000014",
+    "Activity Title": "The Patient's View",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Carrick. Emma",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 3,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "VFMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000015",
+    "Activity Title": "Sexual Health Program Analysis and Research",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Turner, Bobbi",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000015",
+    "Activity Title": "Sexual Health Program Analysis and Research",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Turner, Bobbi",
+    "Cycle": 2,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 3,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "NMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000016",
+    "Activity Title": "An affordable water quality detection device",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Willerth, Stephanie",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "1 half-days",
+    "Max hours": 3,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "VFMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000020",
+    "Activity Title": "Epidemiology and population health pertaining to ocular diseases",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Etminan, Mahyar",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 2,
+    "Est # of hours": 2,
+    "Max # of Students": 3,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000021",
+    "Activity Title": "Research at the Non-Invasive Neurostimulation Therapies lab",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Vila-Rodriguez, Fidel",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 2,
+    "Est # of hours": 2.5,
+    "Max # of Students": 6,
+    "Site": "NMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000022",
+    "Activity Title": "Canadian Federation of Medical Students (CFMS) Global Health Advocate (GHA)",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Kapoor, Videsh",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  }
+ ];
+
+// using jQuery and datatables
+// possible datables for vue https://onewaytech.github.io/vue2-datatable/examples/dist/
+// https://laracasts.com/discuss/channels/vue/using-datatables-with-vue
+var qTable = "";
+$(document).ready(function() {
+  qTable = $("#list").DataTable({
+    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    dom: "Bfrtip",
+    colReorder: true,
+    responsive: true,
+    data: data,
+    columns: cols,
+    buttons: [
+      {
+        text: "Clear Search and sort",
+        action: function(e, dt, node, config) {
+          alert("Reset table");
+        }
+      },
+      {
+        extend: "colvis",
+        text: "Choose Columns",
+        columnText: function(dt, idx, title) {
+          return '<span class="inc">' + (idx + 1) + "</span>" + title;
+        },
+        fade: 100
+      },
+      {
+        extend: "collection",
+        text: "Site",
+        buttons: [
+          {
+            text: "VFMP",
+            action: function() {
+              alert("filter on site");
+            }
+          },
+          {
+            text: "NMP",
+            action: function() {
+              alert("filter on site");
+            }
+          },
+          {
+            text: "SMP",
+            action: function() {
+              alert("filter on site");
+            }
+          },
+          {
+            text: "IMP",
+            action: function() {
+              alert("filter on site");
+            }
+          }
+        ],
+        fade: 100
+      },
+      {
+        extend: "collection",
+        text: "Cycle",
+        buttons: [
+          {
+            text: "1",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          },
+          {
+            text: "2",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          },
+          {
+            text: "3",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          },
+          {
+            text: "Check/Uncheck all",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          }
+        ],
+        fade: 100
+      }
+    ],
+    "initComplete": function(){
+      // Functions are for suckers.
+      $('#list').DataTable().order([1,'asc']).draw();
+      
+      // OR?
+      $('.my-button').click(function(){
+        $('#list').DataTable().order([1,'asc']).draw();
+      }); 
+    }
+  });
+});
+
+var student = false;
+$("#student").click(function() {
+  $("button.active").removeClass("active");
+  $(this).addClass("active");
+  if (student) {
+    student = !student;
+    $(".student, .faculty , .admin").remove();
+    $(".active").removeClass("active");
+    $("#admin").addClass("active");
+  } else {
+    student = !student;
+    $(".faculty , .admin").remove();
+    $("tr").each(function() {
+      $(this).prepend("<td class='student'><button>Enroll</button>");
+    });
+  }
+});
+
+  
+</script>
+
+
+
+
+<div id="controls">
+  <button class="active" id="admin">Admin View</button>
+  <button>Faculty View</button>
+  <button id="student">Student View</button>
+</div>
+<div class="pull-right">Showing Academic Period: 
+  <select> 
+    <option 1="1">2016-2017</option>
+    <option 2="2" selected="selected">2017-2018    </option>
+    <option 3="3">2018-2019</option>
+  </select>
+</div>
+<h1>Flex Activity List View</h1>
+<table id="list"></table>
+
+
+
+<style>
+
+body{
+  margin: 8px;
+}
+.pull-right{ 
+  float: right;
+}
+
+.active {
+  background: darkgray;
+  color: white;
+}
+.striped tr:nth-child(odd){
+  background: #ccc;
+}
+.table {
+  display: table;
+  margin: 0;
+}
+td {
+  text-align: center;
+}
+div.dt-button-collection {
+  width: 400px;
+  columns: 150px;
+}
+div.dt-button-collection a.dt-button {
+  position: static;
+  box-sizing: border-box;
+  padding: 0;
+}
+.inc {
+  border-right: 1px solid #000;
+  display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 10px;
+  background: #ddd;
+  width: 10px;
+}
+
+
+#list button {
+  width: 25px;
+  height: 25px;
+  float: right;
+  clear: right;
+  
+}
+#list th {
+  position: relative;
+  vertical-align: top;
+  background: #ccc;
+  border: 1px solid #fff;
+}
+#list th button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#list th button:nth-child(3) {
+  top: 40px;
+}
+#list th div{
+  float: left;
+  padding-right: 30px;
+  min-width: 75px;
+}
+</style>

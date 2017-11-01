@@ -1,0 +1,436 @@
+// using jQuery and datatables
+// possible datables for vue https://onewaytech.github.io/vue2-datatable/examples/dist/
+// https://laracasts.com/discuss/channels/vue/using-datatables-with-vue
+var qTable = "";
+$(document).ready(function() {
+  qTable = $("#list").DataTable({
+    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    dom: "Bfrtip",
+    sort: false,
+    colReorder: true,
+    responsive: true,
+    buttons: [
+      {
+        text: "Clear Search and sort",
+        action: function(e, dt, node, config) {
+          alert("Reset table");
+        }
+      },
+      {
+        extend: "colvis",
+        text: "Choose Columns",
+        columnText: function(dt, idx, title) {
+          return '<span class="inc">' + (idx + 1) + "</span>" + title;
+        },
+        fade: 100
+      },
+      {
+        extend: "collection",
+        text: "Site",
+        buttons: [
+          {
+            text: "VFMP",
+            action: function() {
+              alert("filter on site");
+            }
+          },
+          {
+            text: "NMP",
+            action: function() {
+              alert("filter on site");
+            }
+          },
+          {
+            text: "SMP",
+            action: function() {
+              alert("filter on site");
+            }
+          },
+          {
+            text: "IMP",
+            action: function() {
+              alert("filter on site");
+            }
+          }
+        ],
+        fade: 100
+      },
+      {
+        extend: "collection",
+        text: "Cycle",
+        buttons: [
+          {
+            text: "1",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          },
+          {
+            text: "2",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          },
+          {
+            text: "3",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          },
+          {
+            text: "Check/Uncheck all",
+            action: function() {
+              alert("filter on Cycle");
+            }
+          }
+        ],
+        fade: 100
+      }
+    ],
+    "initComplete": function(){
+      console.log(this);
+      sortClick(this);
+    }
+  });
+});
+
+var student = false;
+$("#student").click(function() {
+  $("button.active").removeClass("active");
+  $(this).addClass("active");
+  if (student) {
+    student = !student;
+    $(".student, .faculty , .admin").remove();
+    $(".active").removeClass("active");
+    $("#admin").addClass("active");
+  } else {
+    student = !student;
+    $(".faculty , .admin").remove();
+    $("tr").each(function() {
+      $(this).prepend("<td class='student'><button>Enroll</button>");
+    });
+  }
+});
+// var table2 = $.fn.dataTable.Api("#list");
+// up arrow &#9650;
+// down arrow&#9660;
+function sortClick(table){
+  console.log(table.api());
+  $(table[0]).on("click","#actSort", function() {
+    console.log(table);
+    table.api()
+    .order( [ 0, 'desc' ] )
+    .draw();
+    console.log("fail");
+    });
+}
+
+var cols = [
+  {
+    title: 'whatever',
+    data:
+  }
+]
+
+var data = [
+  {
+    "Activity ID": "00001",
+    "Activity Title": "Translational Research in Acute Cerebrovascular Syndrome (ACVS)",
+    "Activity Status": "Proposed",
+    "Primary Supervisor": "Votova, Kristine          Penn, Andrew",
+    "Cycle": 1,
+    "Start Date": "05-mar-18",
+    "End Date": "09-Apr-18",
+    "Description": "5 half-days",
+    "Max hours": 20,
+    "Est # of hours": 20,
+    "Max # of Students": 10,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00001",
+    "Activity Title": "Translational Research in Acute Cerebrovascular Syndrome (ACVS)",
+    "Activity Status": "Proposed",
+    "Primary Supervisor": "Votova, Kristine          Penn, Andrew",
+    "Cycle": 2,
+    "Start Date": "05-mar-18",
+    "End Date": "09-Apr-18",
+    "Description": "5 half-days",
+    "Max hours": 20,
+    "Est # of hours": 20,
+    "Max # of Students": 10,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00002",
+    "Activity Title": "Anatomy Education Project",
+    "Activity Status": "Approved",
+    "Primary Supervisor": "Todd Wallace",
+    "Cycle": 1,
+    "Start Date": "01-Sep-17",
+    "End Date": "09-Apr-18",
+    "Description": "1 full-days",
+    "Max hours": 8,
+    "Est # of hours": 8,
+    "Max # of Students": 50,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00004",
+    "Activity Title": "Writing of a Scientific Review Article on Brain Plasticity & Neurodegeneration",
+    "Activity Status": "Approved",
+    "Primary Supervisor": "Gil-Mohapel, Joana",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 2,
+    "Max # of Students": 4,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00005",
+    "Activity Title": "Evaluation of evidence-based concussion assessment methods on Vancouver Island",
+    "Activity Status": "Proposed",
+    "Primary Supervisor": "Christie, Brian",
+    "Cycle": 2,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 full-days",
+    "Max hours": 9,
+    "Est # of hours": 5,
+    "Max # of Students": 6,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00006",
+    "Activity Title": "Cool Aid Clinic - Community Based Volunteer Activity/ Research With Marginalized Populations",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Drost, Anne",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "3 half-days",
+    "Max hours": 3,
+    "Est # of hours": 1,
+    "Max # of Students": 1,
+    "Site": "IMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "00009",
+    "Activity Title": "eHome i-Care: Modeling Changes in Mobility, Cognition and Daily Acitivities to Predict Care needs in Community Dwelling Older Adults Living with Cognitive Impairment",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Sheets, Debra",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 2,
+    "Est # of hours": 2,
+    "Max # of Students": 2,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000011",
+    "Activity Title": "Immigrant and Refugee Health awareness / education projects",
+    "Activity Status": "Approved",
+    "Primary Supervisor": "Moreno, Alvaro",
+    "Cycle": 2,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 3,
+    "Est # of hours": 2,
+    "Max # of Students": 2,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000012",
+    "Activity Title": "IH - Supportive Cancer Care",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Dr Lori McFarlane",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "1 full-day",
+    "Max hours": 2,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "VFMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000014",
+    "Activity Title": "The Patient's View",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Carrick. Emma",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 3,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "VFMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000015",
+    "Activity Title": "Sexual Health Program Analysis and Research",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Turner, Bobbi",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000015",
+    "Activity Title": "Sexual Health Program Analysis and Research",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Turner, Bobbi",
+    "Cycle": 2,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 3,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "NMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000016",
+    "Activity Title": "An affordable water quality detection device",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Willerth, Stephanie",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "1 half-days",
+    "Max hours": 3,
+    "Est # of hours": 5,
+    "Max # of Students": 4,
+    "Site": "VFMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000020",
+    "Activity Title": "Epidemiology and population health pertaining to ocular diseases",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Etminan, Mahyar",
+    "Cycle": 1,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "2 half-days",
+    "Max hours": 2,
+    "Est # of hours": 2,
+    "Max # of Students": 3,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000021",
+    "Activity Title": "Research at the Non-Invasive Neurostimulation Therapies lab",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Vila-Rodriguez, Fidel",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 2,
+    "Est # of hours": 2.5,
+    "Max # of Students": 6,
+    "Site": "NMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "000022",
+    "Activity Title": "Canadian Federation of Medical Students (CFMS) Global Health Advocate (GHA)",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Kapoor, Videsh",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  },
+  {
+    "Activity ID": "MEDD 420",
+    "Activity Title": "Example Activity",
+    "Activity Status": "Published",
+    "Primary Supervisor": "Martina Coleure",
+    "Cycle": 3,
+    "Start Date": "01-Nov-20",
+    "End Date": "26-Apr-22",
+    "Description": "5 half-days",
+    "Max hours": 35,
+    "Est # of hours": 50,
+    "Max # of Students": 45,
+    "Site": "SMP",
+    "Link to Activity": "View Activity"
+  }
+ ]
