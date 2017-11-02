@@ -36,7 +36,11 @@ div.dt-button-collection a.dt-button {
   background: #ddd;
   width: 10px;
 }
-
+.input-container {
+  position: relative;
+  pointer-events: all;
+  z-index: 4;
+}
 
 #list thead button {
   width: 25px;
@@ -95,4 +99,13 @@ button i {
   padding: 3px;
   border-radius: 3px;
   background: #6ec4e8;
+}
+#controls {
+  background: #000;
+  padding: 8px 24px;
+  position: relative;
+  top: -8px;
+  left: -8px;
+  margin: 0 -16px;
+  box-sizing: content-box;
 }
