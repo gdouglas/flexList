@@ -21,7 +21,6 @@
         </div>
         <h3>Refine results
             <i class="fa fa-filter"></i>
-            </i>
         </h3>
         <label class="full-width">
             Search
@@ -97,11 +96,11 @@
 </template>
 
 <script>
-    module.exports = {
-        data: function {
-            msg: "advanced search"
-        }
-    }
+module.exports = {
+  data: function() {
+    msg: "advanced search";
+  }
+};
 </script>
 <style scoped>
 i {
