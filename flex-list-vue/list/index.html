@@ -13,114 +13,95 @@
             <h1>Flex List</h1>
             <h2>{{currentRole}} View</h2>
         </header>
-        <div class="sidebar">
-            <div class="panel" id="display-style">
-                <div class="panel-head">
-                    <h3>Display Style</h3>
-                </div>
-                <div class="clearfix panel-body">
-                    <ul class="menu none">
-                        <li>
-                            <a href="/events">
-                                <span>Learner View</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admin/events">
-                                <span>Administrator View</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        <label class="full-width">
+            Search
+            <i class="fa fa-search"></i>
+            <input>
+        </label>
+        <button @click="advancedSearch = !advancedSearch">Advanced Search</button>
+        <transition name="fade">
+            <div v-if="advancedSearch" class="advanced-search">
+                <label class="full-width">
+                    Ethics board approval
+                    <br>
+                    <input type="radio" name="ethics">Yes
+                    <br>
+                    <input type="radio" name="ethics">No
+                    <br>
+                    <input type="radio" name="ethics">blank
+                    <br>
+                </label>
+                <label class="full-width">
+                    Cycles
+                    <input>
+                </label>
+                <label class="full-width">
+                    Supervisor
+                    <input>
+                </label>
+                <label class="full-width">
+                    Activity Start Date
+                    <i class="fa fa-calendar"></i>
+                    <input type="date">
+                </label>
+                <label class="full-width">
+                    Activity End Date
+                    <i class="fa fa-calendar"></i>
+                    <input type="date">
+                </label>
+                <label class="full-width">
+                    Max number of students
+                    <i class="fa fa-group"></i>
+                    <input type="number">
+                </label>
+                <label class="full-width">
+                    Min number of students
+                    <i class="fa fa-group"></i>
+                    <input type="number">
+                </label>
+                <label class="full-width">
+                    Estimate hours
+                    <i class="fa fa-clock-o"></i>
+                    <input type="number">
+                </label>
+                <label class="full-width">
+                    Site
+                    <br>
+                    <input type="checkbox" name="site">VFMP
+                    <br>
+                    <input type="checkbox" name="site">IMP
+                    <br>
+                    <input type="checkbox" name="site">SMP
+                    <br>
+                    <input type="checkbox" name="site">VFMP
+                    <br>
+                </label>
+                <label class="full-width">
+                    Status
+                    <br>
+                    <input type="checkbox" name="status">Proposed
+                    <br>
+                    <input type="checkbox" name="status">Active
+                    <br>
+                    <input type="checkbox" name="status">Revised
+                    <br>
+                </label>
+
+
             </div>
-            <h3>Refine results
-                <i class="fa fa-filter"></i>
-                </i>
-            </h3>
-            <label class="full-width">
-                Search
-                <i class="fa fa-search"></i>
-                <input>
-            </label>
-            <label class="full-width">
-                Ethics board approval
-                <br>
-                <input type="radio" name="ethics">Yes
-                <br>
-                <input type="radio" name="ethics">No
-                <br>
-                <input type="radio" name="ethics">blank
-                <br>
-            </label>
-            <label class="full-width">
-                Cycles
-                <input>
-            </label>
-            <label class="full-width">
-                Supervisor
-                <input>
-            </label>
-            <label class="full-width">
-                Activity start
-                <i class="fa fa-calendar"></i>
-                <input type="date">
-            </label>
-            <label class="full-width">
-                Activity End
-                <i class="fa fa-calendar"></i>
-                <input type="date">
-            </label>
-            <label class="full-width">
-                Max number of students
-                <i class="fa fa-group"></i>
-                <input type="number">
-            </label>
-            <label class="full-width">
-                Min number of students
-                <i class="fa fa-group"></i>
-                <input type="number">
-            </label>
-            <label class="full-width">
-                Estimate hours
-                <i class="fa fa-clock-o"></i>
-                <input type="number">
-            </label>
-            <label class="full-width">
-                Site
-                <br>
-                <input type="checkbox" name="site">VFMP
-                <br>
-                <input type="checkbox" name="site">IMP
-                <br>
-                <input type="checkbox" name="site">SMP
-                <br>
-                <input type="checkbox" name="site">VFMP
-                <br>
-            </label>
-            <label class="full-width">
-                Status
-                <br>
-                <input type="checkbox" name="status">Proposed
-                <br>
-                <input type="checkbox" name="status">Active
-                <br>
-                <input type="checkbox" name="status">Revised
-                <br>
-            </label>
-
-
-        </div>
+        </transition>
         <div class="main">
             <table>
                 <thead>
                     <tr>
-                        <th v-if="permission(column)" v-show="column.show" v-for="column in columns">{{column.title}}</th>
+                        <th v-if="permission(column)" v-show="column.show" v-for="column in columns" v-html="column.title"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="row in rows">
-                        <td v-for="(column, index) in row" :key="index">
-                            <div class="info-container" v-html="column" @click="expand(this)"></div>
+                        <td v-for="(item, index) in row" :key="index">
+                            <div class="info-container" v-html="item" @click="expand(this)">
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -131,6 +112,7 @@
         var app = new Vue({
             el: "#app",
             data: {
+                advancedSearch: false,
                 columns: [
                     {
                         title: "Activity ID",
@@ -138,49 +120,29 @@
                         show: true
                     },
                     {
-                        title: "Name",
-                        permission: "all",
-                        show: false
-                    },
-                    {
-                        title: "email address",
-                        permission: "all",
-                        show: false
-                    },
-                    {
                         title: "Activity Title",
                         permission: "all",
                         show: true
-                    },
-                    // {
-                    //     title: "Activity Summary",
-                    //     permission: "all",
-                    //     show: false
-                    // },
-                    // {
-                    //     title: "Detailed Description",
-                    //     permission: "all",
-                    //     show: false
-                    // },
-                    // {
-                    //     title: "Suggested Deliverables",
-                    //     permission: "all",
-                    //     show: false
-                    // },
-                    // {
-                    //     title: "Prerequisites",
-                    //     permission: "all",
-                    //     show: false
-                    // },
-                    {
-                        title: "Course Fees",
-                        permission: "all",
-                        show: false
                     },
                     {
                         title: "Ethics Board approval required?",
                         permission: "all",
                         show: true
+                    },
+                    {
+                        title: "Primary Supervisor Name",
+                        permission: "all",
+                        show: true
+                    },
+                    {
+                        title: "Primary Supervisor Email",
+                        permission: "admin",
+                        show: true
+                    },
+                    {
+                        title: "Course Fees",
+                        permission: "all",
+                        show: false
                     },
                     {
                         title: "Activity Category",
@@ -192,11 +154,6 @@
                         permission: "all",
                         show: false
                     },
-                    // {
-                    //     title: "Activity Delivery Details",
-                    //     permission: "all",
-                    //     show: false
-                    // },
                     {
                         title: "Please indicate if the activity will require travel?",
                         permission: "all",
@@ -213,27 +170,22 @@
                         show: false
                     },
                     {
-                        title: "Supervisors",
+                        title: "Activity Start Date",
                         permission: "all",
                         show: true
                     },
                     {
-                        title: "When is the activity available?",
+                        title: "Activity End Date",
                         permission: "all",
                         show: true
                     },
                     {
-                        title: "Cycles",
+                        title: "Cycle available <a href='#link-to-documentation'><i class='fa fa-question-circle'></i></a>",
                         permission: "all",
                         show: true
                     },
                     {
-                        title: "Start Date",
-                        permission: "all",
-                        show: true
-                    },
-                    {
-                        title: "End Date",
+                        title: "Seats available",
                         permission: "all",
                         show: true
                     },
@@ -268,58 +220,31 @@
                         show: true
                     },
                     {
-                        title: "Edit",
-                        permission: "all",
-                        show: true
-                    },
-                    {
-                        title: "Detailed View",
-                        permission: "all",
-                        show: true
-                    },
-                    {
-                        title: "Migrate",
+                        title: "",
                         permission: "all",
                         show: true
                     }
                 ],
                 rows: [{
                     id: "00452",
-                    title: "Review of outcomes using two &beta;-hCG-based protocols for triaging follow-up and management of PUL",
+                    title: "<a href='#item'>Review of outcomes using two &beta;-hCG-based protocols for triaging follow-up and management of PUL</a>",
                     ethics: "",
-                    supervisor: "Tom, tom@email.com",
-                    available: "Jun 2018",
-                    cycles: "5,6,7",
+                    supervisor: "Tom",
+                    email: "tom@email.com",
                     start: "Sep 2 2018",
                     end: "Aug 25 2019",
+                    cycles: "5",
+                    seatsAvailable: "1",
                     maxStudent: "1",
                     minStudent: "1",
                     estHours: "3",
                     site: "VFMP",
                     status: "proposed",
                     active: "no",
-                    edit: "<button>Edit</button>",
-                    detailedView: "<button>Full Page</button>",
-                    migrate: "<button>Roll Over</button>"
-                }, {
-                    id: "123",
-                    title: "foo",
-                    ethics: "no",
-                    supervisor: "Tom, tom@email.com",
-                    available: "Jun 2018",
-                    cycles: "5,6,7",
-                    start: "Jun 6 2018",
-                    end: "Jan 12 2019",
-                    maxStudent: "5",
-                    minStudent: "1",
-                    estHours: "3",
-                    site: "nmp",
-                    status: "proposed",
-                    active: "no",
-                    edit: "<button>Edit</button>",
-                    detailedView: "<button>Full Page</button>",
-                    migrate: "<button>Roll Over</button>"
-                }],
+                    controls: `<button class='fa fa-info-circle' title='full details'></button>
+                    <button class='fa fa-edit' title='edit'></button>
+                    <button class='fa fa-repeat' title='roll over'></button>`,
+                },],
                 currentRole: "admin",
                 userTypes:
                     {
@@ -332,9 +257,6 @@
                             student: true
                         }
                     }
-
-
-
             },
             methods: {
                 permission: function (source) {
@@ -349,6 +271,28 @@
         });
     </script>
     <style>
+        .advanced-search {
+            overflow: hidden;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: height .3s;
+        }
+
+        .fade-enter-active {
+            height: 550px;
+        }
+
+        .fade-enter,
+        .fade-leave-active {
+            height: 0;
+        }
+
+        .fade-leave {
+            height: 550px;
+        }
+
         * {
             box-sizing: border-box;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
@@ -378,6 +322,13 @@
         td {
             border: 1px solid;
             padding: 5px;
+            text-align: center;
+        }
+
+        td button {
+            margin: 5px 0;
+            height: 40px;
+            width: 40px;
         }
 
         tbody tr:nth-child(odd) {
@@ -397,7 +348,7 @@
 
         .sidebar {
             float: left;
-            width: 23.404255319148934%;
+            /* width: 23.404255319148934%; */
         }
 
         .sidebar i {
@@ -418,8 +369,8 @@
 
         .main {
             float: left;
-            margin-left: 2.127659574468085%;
-            width: 74.46808510638297%;
+            /* margin-left: 2.127659574468085%; */
+            /* width: 74.46808510638297%; */
             overflow: auto;
         }
     </style>

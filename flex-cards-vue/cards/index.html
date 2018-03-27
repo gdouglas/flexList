@@ -33,16 +33,8 @@
                     </ul>
                 </div>
             </div>
-            <h3>Refine results
-                <i class="fa fa-filter"></i>
-                </i>
-            </h3>
-            <label class="full-width">
-                Search
-                <i class="fa fa-search"></i>
-                <input>
-            </label>
-            <label class="full-width">
+        </div>
+        <!-- <label class="full-width">
                 Ethics board approval
                 <br>
                 <input type="radio" name="ethics">Yes
@@ -109,9 +101,83 @@
             </label>
 
 
-        </div>
+        </div> -->
         <div class="main">
-            <table>
+            <label class="full-width">
+                Search
+                <i class="fa fa-search"></i>
+                <input class="full-width">
+            </label>
+            <button> table view</button>
+            <button>Advanced Search</button>
+            <div class="advanced">
+                <label class="full-width">
+                    Ethics board approval
+                    <br>
+                    <input type="radio" name="ethics">Yes
+                    <br>
+                    <input type="radio" name="ethics">No
+                    <br>
+                    <input type="radio" name="ethics">blank
+                    <br>
+                </label>
+                <label class="full-width">
+                    Cycles
+                    <input>
+                </label>
+                <label class="full-width">
+                    Supervisor
+                    <input>
+                </label>
+                <label class="full-width">
+                    Activity start
+                    <i class="fa fa-calendar"></i>
+                    <input type="date">
+                </label>
+                <label class="full-width">
+                    Activity End
+                    <i class="fa fa-calendar"></i>
+                    <input type="date">
+                </label>
+                <label class="full-width">
+                    Max number of students
+                    <i class="fa fa-group"></i>
+                    <input type="number">
+                </label>
+                <label class="full-width">
+                    Min number of students
+                    <i class="fa fa-group"></i>
+                    <input type="number">
+                </label>
+                <label class="full-width">
+                    Estimate hours
+                    <i class="fa fa-clock-o"></i>
+                    <input type="number">
+                </label>
+                <label class="full-width">
+                    Site
+                    <br>
+                    <input type="checkbox" name="site">VFMP
+                    <br>
+                    <input type="checkbox" name="site">IMP
+                    <br>
+                    <input type="checkbox" name="site">SMP
+                    <br>
+                    <input type="checkbox" name="site">VFMP
+                    <br>
+                </label>
+                <label class="full-width">
+                    Status
+                    <br>
+                    <input type="checkbox" name="status">Proposed
+                    <br>
+                    <input type="checkbox" name="status">Active
+                    <br>
+                    <input type="checkbox" name="status">Revised
+                    <br>
+                </label>
+            </div>
+            <!-- <table>
                 <thead>
                     <tr>
                         <th v-if="permission(column)" v-show="column.show" v-for="column in columns">{{column.title}}</th>
@@ -124,7 +190,24 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+            <div class="result-list">
+                <div v-for="row in rows">
+                    <h3 v-text="row.title"></h3>
+                    <div v-text="row.description"></div>
+                    <div class="controls">
+                        <button title="Save">
+                            <i class="fa fa-save" aria-hidden="true"></i>
+                        </button>
+                        <button title="roll edit">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </button>
+                        <button title="roll over" @click="toggleRoll($event)">
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -286,6 +369,7 @@
                 rows: [{
                     id: "00452",
                     title: "Review of outcomes using two &beta;-hCG-based protocols for triaging follow-up and management of PUL",
+                    description: "A long winded description Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sequi autem architecto natus et, repudiandae cupiditate veritatis possimus asperiores esse laboriosam voluptate earum alias est porro, quam neque culpa corrupti.",
                     ethics: "",
                     supervisor: "Tom, tom@email.com",
                     available: "Jun 2018",
@@ -303,7 +387,8 @@
                     migrate: "<button>Roll Over</button>"
                 }, {
                     id: "123",
-                    title: "foo",
+                    title: "Test Title",
+                    description: "Vel sint possimus laboriosam doloremque illum ut. Eaque nemo hic molestiae ut et officiis molestiae accusantium. Aspernatur cumque labore sit ut impedit et dolorem.lorem",
                     ethics: "no",
                     supervisor: "Tom, tom@email.com",
                     available: "Jun 2018",
@@ -344,7 +429,13 @@
                 },
                 expand: function (e) {
                     console.log(e);
-                }
+                },
+                toggleRoll: function (e) {
+                    var icon = document.querySelectorAll(e.target);
+                    console.log(icon);
+                    // console.log(document.querySelectorAll(icon + "i"));
+                    // icon.classList.toggle("fa-repeat");
+                },
             },
         });
     </script>
