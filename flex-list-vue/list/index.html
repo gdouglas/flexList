@@ -13,88 +13,109 @@
             <h1>Flex List</h1>
             <h2>{{currentRole}} View</h2>
         </header>
-        <label class="full-width">
-            Search
-            <i class="fa fa-search"></i>
-            <input>
-        </label>
-        <button @click="advancedSearch = !advancedSearch">Advanced Search</button>
-        <transition name="fade">
-            <div v-if="advancedSearch" class="advanced-search">
-                <label class="full-width">
-                    Ethics board approval
-                    <br>
-                    <input type="radio" name="ethics">Yes
-                    <br>
-                    <input type="radio" name="ethics">No
-                    <br>
-                    <input type="radio" name="ethics">blank
-                    <br>
+        <div class="table-settings">
+            <label class="half-width">
+                Search
+                <i class="fa fa-search"></i>
+                <input>
+            </label>
+            <label class="half-width pull-right">
+                Academic Year
+                <select>
+                    <option>2015-2016</option>
+                    <option>2016-2017</option>
+                    <option selected>2017-2018</option>
+                    <option>2018-2019</option>
+                    <option>2019-2020</option>
+                    <option>2020-2021</option>
+                </select>
+            </label>
+        </div>
+        <button class="margin-top" @click="advancedSearch = !advancedSearch">Advanced Search</button>
+        <div v-if="setColumns">
+            <button class="pull-right">Set to default</button>
+            <hr>
+            <div class="set-columns-container">
+                <label v-for="column in columns" v-if="column.toggleable" class="set-column-option" :key="column.title">
+                    <input type="checkbox" v-model="column.show">
+                    <span v-html="column.title"></span>
                 </label>
-                <label class="full-width">
-                    Cycles
-                    <input>
-                </label>
-                <label class="full-width">
-                    Supervisor
-                    <input>
-                </label>
-                <label class="full-width">
-                    Activity Start Date
-                    <i class="fa fa-calendar"></i>
-                    <input type="date">
-                </label>
-                <label class="full-width">
-                    Activity End Date
-                    <i class="fa fa-calendar"></i>
-                    <input type="date">
-                </label>
-                <label class="full-width">
-                    Max number of students
-                    <i class="fa fa-group"></i>
-                    <input type="number">
-                </label>
-                <label class="full-width">
-                    Min number of students
-                    <i class="fa fa-group"></i>
-                    <input type="number">
-                </label>
-                <label class="full-width">
-                    Estimate hours
-                    <i class="fa fa-clock-o"></i>
-                    <input type="number">
-                </label>
-                <label class="full-width">
-                    Site
-                    <br>
-                    <input type="checkbox" name="site">VFMP
-                    <br>
-                    <input type="checkbox" name="site">IMP
-                    <br>
-                    <input type="checkbox" name="site">SMP
-                    <br>
-                    <input type="checkbox" name="site">VFMP
-                    <br>
-                </label>
-                <label class="full-width">
-                    Status
-                    <br>
-                    <input type="checkbox" name="status">Proposed
-                    <br>
-                    <input type="checkbox" name="status">Active
-                    <br>
-                    <input type="checkbox" name="status">Revised
-                    <br>
-                </label>
-
-
             </div>
-        </transition>
+        </div>
+        <div v-if="advancedSearch" class="advanced-search">
+            <label class="full-width">
+                Ethics board approval
+                <br>
+                <input type="radio" name="ethics">Yes
+                <br>
+                <input type="radio" name="ethics">No
+                <br>
+                <input type="radio" name="ethics">blank
+                <br>
+            </label>
+            <label class="full-width">
+                Cycles
+                <input>
+            </label>
+            <label class="full-width">
+                Supervisor
+                <input>
+            </label>
+            <label class="full-width">
+                Activity Start Date
+                <i class="fa fa-calendar"></i>
+                <input type="date">
+            </label>
+            <label class="full-width">
+                Activity End Date
+                <i class="fa fa-calendar"></i>
+                <input type="date">
+            </label>
+            <label class="full-width">
+                Max number of students
+                <i class="fa fa-group"></i>
+                <input type="number">
+            </label>
+            <label class="full-width">
+                Min number of students
+                <i class="fa fa-group"></i>
+                <input type="number">
+            </label>
+            <label class="full-width">
+                Estimate hours
+                <i class="fa fa-clock-o"></i>
+                <input type="number">
+            </label>
+            <label class="full-width">
+                Site
+                <br>
+                <input type="checkbox" name="site">VFMP
+                <br>
+                <input type="checkbox" name="site">IMP
+                <br>
+                <input type="checkbox" name="site">SMP
+                <br>
+                <input type="checkbox" name="site">VFMP
+                <br>
+            </label>
+            <label class="full-width">
+                Status
+                <br>
+                <input type="checkbox" name="status">Proposed
+                <br>
+                <input type="checkbox" name="status">Active
+                <br>
+                <input type="checkbox" name="status">Revised
+                <br>
+            </label>
+        </div>
         <div class="main">
-            <table>
+            <table class="margin-top">
                 <thead>
                     <tr>
-                        <th v-if="permission(column)" v-show="column.show" v-for="column in columns" v-html="column.title"></th>
+                        <th v-if="permission(column)" v-show="column.show" v-for="column in columns">
+                            <div @click="column.toggleable ? sort($event,column) : choose($event,column)" v-html="column.title"></div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,120 +134,138 @@
             el: "#app",
             data: {
                 advancedSearch: false,
+                setColumns: false,
                 columns: [
                     {
                         title: "Activity ID",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Activity Title",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Ethics Board approval required?",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Primary Supervisor Name",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Primary Supervisor Email",
                         permission: "admin",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Course Fees",
                         permission: "all",
+                        toggleable: true,
                         show: false
                     },
                     {
                         title: "Activity Category",
                         permission: "all",
+                        toggleable: true,
                         show: false
                     },
                     {
                         title: "Activity Interactions",
                         permission: "all",
+                        toggleable: true,
                         show: false
                     },
                     {
                         title: "Please indicate if the activity will require travel?",
                         permission: "all",
+                        toggleable: true,
                         show: false
                     },
                     {
                         title: "Information regarding primary location of activity",
                         permission: "all",
+                        toggleable: true,
                         show: false
                     },
                     {
                         title: "Location Details (if activity requires travel)",
                         permission: "all",
+                        toggleable: true,
                         show: false
                     },
                     {
                         title: "Activity Start Date",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Activity End Date",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Cycle available <a href='#link-to-documentation'><i class='fa fa-question-circle'></i></a>",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Seats available",
                         permission: "all",
-                        show: true
-                    },
-                    {
-                        title: "Cycles",
-                        permission: "all",
-                        show: true
+                        toggleable: true,
+                        show: false
                     },
                     {
                         title: "Max # sudents",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Min # students",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Est # hours",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Site",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Status",
                         permission: "all",
+                        toggleable: true,
                         show: true
                     },
                     {
                         title: "Active",
                         permission: "all",
-                        show: true
+                        toggleable: true,
+                        show: false
                     },
                     {
-                        title: "",
+                        title: "<button><i class='fa fa-2x fa-cogs' title='Choose Columns'></i></button>",
                         permission: "all",
+                        toggleable: false,
                         show: true
                     }
                 ],
@@ -236,17 +275,17 @@
                     ethics: "",
                     supervisor: "Tom",
                     email: "tom@email.com",
-                    start: "Sep 2 2018",
-                    end: "Aug 25 2019",
-                    cycles: "5",
-                    seatsAvailable: "1",
+                    start: "Sep 2018",
+                    end: "Aug 2019",
+                    cycle: "5",
+                    // seatsAvailable: "1",
                     maxStudent: "1",
                     minStudent: "1",
                     estHours: "3",
                     site: "VFMP",
-                    status: "proposed",
-                    active: "no",
-                    controls: `<button class='fa fa-info-circle' title='full details'></button>
+                    status: "proposed, approved, published, archived",
+                    // active: "no",
+                    controls: `<button class='fa fa-folder-open' title='full details'></button>
                     <button class='fa fa-edit' title='edit'></button>
                     <button class='fa fa-repeat' title='roll over'></button>`,
                 },],
@@ -271,31 +310,79 @@
                 },
                 expand: function (e) {
                     console.log(e);
+                },
+                choose: function (e, data) {
+                    this.$data.setColumns = !this.$data.setColumns;
+                },
+                sort: function (e, data) {
+                    console.log(e, data);
                 }
+
             },
         });
     </script>
     <style>
+        .pull-right {
+            float: right;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
         .advanced-search {
             overflow: hidden;
         }
 
-        .fade-enter-active,
-        .fade-leave-active {
-            transition: height .3s;
+        .set-columns-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1 auto;
+            padding-bottom: 1em;
         }
 
-        .fade-enter-active {
-            height: 550px;
+        .set-column-option {
+            width: 25%;
+            display: flex;
+            flex: 1 auto;
+            cursor: pointer;
+            margin: 2px 0;
         }
 
-        .fade-enter,
-        .fade-leave-active {
-            height: 0;
+        .set-column-option input {
+            width: 30px;
         }
 
-        .fade-leave {
-            height: 550px;
+        .set-column-option span {
+            flex: 1;
+        }
+
+        .add-icon:before {
+            content: " ";
+            display: block;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            width: 70%;
+            height: 2px;
+            background: #fff;
+            top: 50%;
+            left: 50%;
+        }
+
+        .add-icon:after {
+            content: " ";
+            display: block;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            width: 2px;
+            height: 70%;
+            background: #fff;
+            top: 50%;
+            left: 50%;
+        }
+
+        .text-right {
+            text-align: right;
         }
 
         * {
@@ -323,6 +410,10 @@
             border: 1px solid;
         }
 
+        .margin-top {
+            margin-top: 1em;
+        }
+
         th,
         td {
             border: 1px solid;
@@ -338,6 +429,12 @@
 
         tbody tr:nth-child(odd) {
             background: #eee;
+        }
+
+        .advanced-search label.full-width {
+            width: 300px;
+            text-align: right;
+            float: left;
         }
 
         .full-width {
