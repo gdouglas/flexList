@@ -115,6 +115,7 @@
                     <tr>
                         <th v-if="permission(column)" v-show="column.show" v-for="column in columns">
                             <div @click="column.toggleable ? sort($event,column) : choose($event,column)" v-html="column.title"></div>
+
                         </th>
                     </tr>
                 </thead>
